@@ -1,0 +1,22 @@
+@media (max-width: 991.98px) {
+    .sidebar {
+        left: -260px;
+        transition: 600ms;
+    }
+
+    .sidebar.active {
+        transition: 600ms;
+        left: 0;
+    }
+
+    .dashboard {
+        padding-left: 0;
+    }
+}
+
+@media (min-width: 992px) {
+    .topbar,
+    .dashboard .content {
+        padding: 0 42px;
+    }
+}
