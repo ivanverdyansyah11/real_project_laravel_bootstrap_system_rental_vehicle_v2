@@ -525,6 +525,19 @@ body.login {
 
 
 /* MODAL */
+.modal {
+    padding-right: 0 !important;
+}
+
+html::-webkit-scrollbar {
+    display: none;
+}
+
+html {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
 .modal .modal-content {
     border-radius: 12px;
 }
