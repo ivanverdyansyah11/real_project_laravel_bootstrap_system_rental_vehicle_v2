@@ -28,6 +28,8 @@
                                 <i class="fa-solid fa-magnifying-glass"></i>
                             </button>
                         </form>
+                        <a href="{{ route('report-return-transaction.export') }}"
+                            class="button-primary-small d-none d-md-inline-block">Export Transaction</a>
                     </div>
                     <div class="wrapper-table mt-4">
                         <table class="table" style="width:100%">
