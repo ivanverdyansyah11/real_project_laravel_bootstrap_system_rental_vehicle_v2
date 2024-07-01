@@ -32,7 +32,8 @@
                     </div>
                     <div class="menu-value">
                         <p>Total Transaction</p>
-                        <h6>{{ $total_transaction < 10 ? '0' . $total_transaction : $total_transaction }}</h6>
+                        <h6>{{ $total_transaction < 10 && $total_transaction != 0 ? '0' . $total_transaction : $total_transaction }}
+                        </h6>
                     </div>
                 </div>
             </div>
