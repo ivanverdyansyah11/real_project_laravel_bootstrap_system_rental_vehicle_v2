@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Repositories\ReturnTransactionRepositories;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use App\Exports\ReturnTransactionsExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ReportReturnTransactionController extends Controller
 {
@@ -30,5 +32,10 @@ class ReportReturnTransactionController extends Controller
             'page' => 'Dashboard',
             'return' => $this->returnTransactionRepositories->findReturnById($id),
         ]);
+    }
+
+    public function export()
+    {
+        return Excel::download(new ReturnTransactionsExport, 'return-transaction.xlsx');
     }
 }
