@@ -59,4 +59,5 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('/report-booking', ReportBookingController::class);
     Route::resource('/report-transaction', ReportTransactionController::class);
     Route::resource('/report-return-transaction', ReportReturnTransactionController::class);
+    Route::get('/report-return-transaction/export/return-transaction', [ReportReturnTransactionController::class, 'export'])->name('report-return-transaction.export');
 });
