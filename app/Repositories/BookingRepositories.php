@@ -111,8 +111,26 @@ class BookingRepositories
             })
             ->get(['drivers_id', 'vehicles_id']);
 
-        $driversIds = $bookings->pluck('drivers_id')->toArray();
-        $vehiclesIds = $bookings->pluck('vehicles_id')->toArray();
+        $transactions = $this->transaction
+            ->where('status', 1)
+            ->whereHas('booking', function ($query) use ($pickupDate, $returnDate) {
+                $query->whereBetween('pickup_date', [$pickupDate, $returnDate])
+                    ->orWhereBetween('return_date', [$pickupDate, $returnDate])
+                    ->orWhere(function ($query) use ($pickupDate, $returnDate) {
+                        $query->where('pickup_date', '<=', $pickupDate)
+                            ->where('return_date', '>=', $returnDate);
+                    });
+            })
+            ->get();
+
+        $driversIdsFromBookings = $bookings->pluck('drivers_id')->toArray();
+        $vehiclesIdsFromBookings = $bookings->pluck('vehicles_id')->toArray();
+        $driversIdsFromTransactions = $transactions->pluck('booking.drivers_id')->toArray();
+        $vehiclesIdsFromTransactions = $transactions->pluck('booking.vehicles_id')->toArray();
+        $driversIds = array_merge($driversIdsFromBookings, $driversIdsFromTransactions);
+        $vehiclesIds = array_merge($vehiclesIdsFromBookings, $vehiclesIdsFromTransactions);
+        $driversIds = array_unique($driversIds);
+        $vehiclesIds = array_unique($vehiclesIds);
         return [$driversIds, $vehiclesIds];
     }
 
