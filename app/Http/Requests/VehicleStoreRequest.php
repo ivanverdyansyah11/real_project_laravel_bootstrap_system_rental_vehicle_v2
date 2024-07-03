@@ -29,7 +29,7 @@ class VehicleStoreRequest extends FormRequest
             'license_plate_number' => 'required|string|max:25',
             'kilometer' => 'required|integer',
             'capacity' => 'required|integer',
-            'price' => 'required|integer',
+            'price' => 'required|string',
             'year_of_creation' => 'required|integer',
             'date_purchased' => 'required|date',
             'color' => 'required|string|max:50',
