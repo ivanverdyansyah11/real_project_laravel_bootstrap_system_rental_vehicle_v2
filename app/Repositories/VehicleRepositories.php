@@ -54,6 +54,8 @@ class VehicleRepositories
 
     public function store($request)
     {
+        $request['price'] = str_replace('Rp. ', '', $request['price']);
+        $request['price'] = (int) str_replace('.', '', $request['price']);
         $request['vehicle_image'] = $this->uploadFile->uploadSingleFile($request['vehicle_image'], "assets/image/vehicle");
         return $this->vehicle->create($request);
     }
@@ -61,6 +63,8 @@ class VehicleRepositories
     public function update($request, $id)
     {
         $vehicle = $this->findById($id);
+        $request['price'] = str_replace('Rp. ', '', $request['price']);
+        $request['price'] = (int) str_replace('.', '', $request['price']);
         if (isset($request["vehicle_image"])) {
             $this->uploadFile->deleteExistFile("assets/image/vehicle/" . $vehicle->vehicle_image);
             $request['vehicle_image'] = $this->uploadFile->uploadSingleFile($request['vehicle_image'], 'assets/image/vehicle');
