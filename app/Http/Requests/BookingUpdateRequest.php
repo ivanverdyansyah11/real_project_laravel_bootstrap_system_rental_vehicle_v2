@@ -23,10 +23,10 @@ class BookingUpdateRequest extends FormRequest
     {
         return [
             'bookings_id' => 'required|integer',
-            'total_price' => 'required|integer',
+            'total_price' => 'required|string',
             'paid_image' => 'required|file|image|mimes:png,jpg,jpeg,gif,webp,svg|max:2048',
-            'total_paid' => 'required|integer',
-            'total_change' => 'required|integer',
+            'total_paid' => 'required|string',
+            'total_change' => 'required|string',
             'payment_method' => 'required|string|max:50',
             'status' => 'required|integer',
         ];
