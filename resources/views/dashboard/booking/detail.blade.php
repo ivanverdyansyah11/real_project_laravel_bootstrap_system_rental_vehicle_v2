@@ -4,9 +4,9 @@
     <div class="content container mt-4">
         <div class="row">
             <div class="col-12">
-                @if (session()->has('failed'))
+                @if ($booking->status == 2)
                     <div class="alert alert-danger w-100 mb-3" role="alert">
-                        {{ session('failed') }}
+                        This vehicle is already booked for that date!
                     </div>
                 @endif
             </div>
