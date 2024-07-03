@@ -58,10 +58,12 @@
                                             <td>{{ $booking->pickup_date }}</td>
                                             <td>{{ $booking->return_date }}</td>
                                             <td class="d-flex justify-content-end gap-1 table-mobile" style="width: 200px;">
-                                                <a href="{{ route('booking.edit', $booking->id) }}"
-                                                    class="wrapper-icon icon-edit d-flex align-items-center justify-content-center">
-                                                    <i class="fa-solid fa-circle-check" style="font-size: 0.85rem;"></i>
-                                                </a>
+                                                @if ($booking->status != 2)
+                                                    <a href="{{ route('booking.edit', $booking->id) }}"
+                                                        class="wrapper-icon icon-edit d-flex align-items-center justify-content-center">
+                                                        <i class="fa-solid fa-circle-check" style="font-size: 0.85rem;"></i>
+                                                    </a>
+                                                @endif
                                                 <a href="{{ route('booking.show', $booking->id) }}"
                                                     class="wrapper-icon icon-detail d-flex align-items-center justify-content-center">
                                                     <i class="fa-solid fa-eye" style="font-size: 0.85rem;"></i>
