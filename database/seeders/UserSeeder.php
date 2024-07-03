@@ -16,63 +16,63 @@ class UserSeeder extends Seeder
         User::create([
             'name' => 'Admin',
             'email' => 'admin@gmail.com',
-            'password' => 'admin',
+            'password' => bcrypt('admin'),
             'admins_id' => 1,
         ]);
 
         User::create([
             'name' => 'Customer1',
             'email' => 'customer1@gmail.com',
-            'password' => 'Customer1',
+            'password' => bcrypt('Customer1'),
             'customers_id' => 1,
         ]);
 
         User::create([
             'name' => 'Customer2',
             'email' => 'customer2@gmail.com',
-            'password' => 'Customer2',
+            'password' => bcrypt('Customer2'),
             'customers_id' => 1,
         ]);
 
         User::create([
             'name' => 'Customer3',
             'email' => 'customer3@gmail.com',
-            'password' => 'Customer3',
+            'password' => bcrypt('Customer3'),
             'customers_id' => 1,
         ]);
 
         User::create([
             'name' => 'Customer4',
             'email' => 'customer4@gmail.com',
-            'password' => 'Customer4',
+            'password' => bcrypt('Customer4'),
             'customers_id' => 1,
         ]);
 
         User::create([
             'name' => 'Driver1',
             'email' => 'driver1@gmail.com',
-            'password' => 'Driver1',
+            'password' => bcrypt('Driver1'),
             'drivers_id' => 1,
         ]);
 
         User::create([
             'name' => 'Driver2',
             'email' => 'driver2@gmail.com',
-            'password' => 'Driver2',
+            'password' => bcrypt('Driver2'),
             'drivers_id' => 1,
         ]);
 
         User::create([
             'name' => 'Driver3',
             'email' => 'driver3@gmail.com',
-            'password' => 'Driver3',
+            'password' => bcrypt('Driver3'),
             'drivers_id' => 1,
         ]);
 
         User::create([
             'name' => 'Driver4',
             'email' => 'driver4@gmail.com',
-            'password' => 'Driver4',
+            'password' => bcrypt('Driver4'),
             'drivers_id' => 1,
         ]);
     }
