@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\BookingStoreRequest;
 use App\Http\Requests\BookingUpdateRequest;
 use App\Repositories\BookingRepositories;
+use App\Repositories\TransactionRepositories;
 use App\Repositories\CustomerRepositories;
 use App\Repositories\DriverRepositories;
 use App\Repositories\VehicleRepositories;
@@ -18,6 +19,7 @@ class BookingController extends Controller
 {
     public function __construct(
         protected readonly BookingRepositories $bookingRepositories,
+        protected readonly TransactionRepositories $transactionRepositories,
         protected readonly DriverRepositories $driverRepositories,
         protected readonly CustomerRepositories $customerRepositories,
         protected readonly VehicleRepositories $vehicleRepositories,
@@ -30,6 +32,7 @@ class BookingController extends Controller
             'title' => 'Booking Page',
             'page' => 'Dashboard',
             'bookings' => $this->bookingRepositories->findAllActiveWithPaginate($request),
+            'booking_transactions' => $this->transactionRepositories->findAll(),
             'search' => $request,
         ]);
     }
