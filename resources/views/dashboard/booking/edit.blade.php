@@ -71,7 +71,7 @@
                             <div class="col-md-6">
                                 <div class="input-group d-flex flex-column">
                                     <label for="total_price">Total Price</label>
-                                    <input type="number" class="input w-100" name="total_price" id="total_price" required
+                                    <input type="text" class="input w-100" name="total_price" id="total_price" required
                                         readonly value="{{ $total_days * $booking->vehicle->price }}">
                                     @error('total_price')
                                         <p class="text-invalid">{{ $message }}</p>
@@ -101,7 +101,7 @@
                             <div class="col-md-6">
                                 <div class="input-group d-flex flex-column">
                                     <label for="total_paid">Total Paid</label>
-                                    <input type="number" class="input w-100" name="total_paid" id="total_paid" required
+                                    <input type="text" class="input w-100" name="total_paid" id="total_paid" required
                                         placeholder="Enter your total paid..">
                                     @error('total_paid')
                                         <p class="text-invalid">{{ $message }}</p>
@@ -111,7 +111,7 @@
                             <div class="col-md-6">
                                 <div class="input-group d-flex flex-column">
                                     <label for="total_change">Total Change</label>
-                                    <input type="number" class="input w-100" name="total_change" id="total_change"
+                                    <input type="text" class="input w-100" name="total_change" id="total_change"
                                         required readonly>
                                     @error('total_change')
                                         <p class="text-invalid">{{ $message }}</p>
@@ -152,10 +152,31 @@
         const totalChange = document.querySelector('#total_change');
 
         totalPaid.addEventListener('keyup', function() {
-            if (parseInt(totalPaid.value) < parseInt(totalPrice.value)) {
-                totalChange.value = '0'
+            let totalPriceValue = totalPrice.value.replace('Rp. ', '')
+            totalPriceValue = totalPriceValue.replace(/\./g, '')
+            let totalPaidValue = totalPaid.value.replace('Rp. ', '')
+            totalPaidValue = totalPaidValue.replace(/\./g, '')
+
+            if (parseInt(totalPaidValue) < parseInt(totalPriceValue)) {
+                totalChange.value = 'Rp. 0'
             } else {
-                totalChange.value = totalPaid.value - totalPrice.value
+                totalChange.value = formatRupiah(totalPaidValue - totalPriceValue, 'Rp. ')
+
+                function formatRupiah(angka, prefix) {
+                    angka = angka.toString();
+                    let number_string = angka.replace(/[^,\d]/g, '').toString(),
+                        split = number_string.split(','),
+                        sisa = split[0].length % 3,
+                        rupiah = split[0].substr(0, sisa),
+                        ribuan = split[0].substr(sisa).match(/\d{3}/gi);
+
+                    if (ribuan) {
+                        separator = sisa ? '.' : '';
+                        rupiah += separator + ribuan.join('.');
+                    }
+                    rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
+                    return prefix == undefined ? rupiah : (rupiah ? prefix + rupiah : '');
+                }
             }
         })
 
@@ -165,5 +186,29 @@
         inputImage.addEventListener('change', function() {
             tagImage.src = URL.createObjectURL(inputImage.files[0]);
         });
+
+        totalPrice.value = formatRupiah(totalPrice.value, 'Rp. ');
+        totalPrice.addEventListener('keyup', function(e) {
+            totalPrice.value = formatRupiah(this.value, 'Rp. ');
+        });
+
+        totalPaid.value = formatRupiah(totalPaid.value, 'Rp. ');
+        totalPaid.addEventListener('keyup', function(e) {
+            totalPaid.value = formatRupiah(this.value, 'Rp. ');
+        });
+
+        function formatRupiah(angka, prefix) {
+            let number_string = angka.replace(/[^,\d]/g, '').toString(),
+                split = number_string.split(','),
+                sisa = split[0].length % 3,
+                rupiah = split[0].substr(0, sisa),
+                ribuan = split[0].substr(sisa).match(/\d{3}/gi);
+            if (ribuan) {
+                separator = sisa ? '.' : '';
+                rupiah += separator + ribuan.join('.');
+            }
+            rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
+            return prefix == undefined ? rupiah : (rupiah ? 'Rp. ' + rupiah : '');
+        }
     </script>
 @endpush
