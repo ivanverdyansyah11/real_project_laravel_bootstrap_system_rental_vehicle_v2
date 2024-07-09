@@ -618,6 +618,14 @@ html {
     font-family: var(--urbanist-bold);
 }
 
+.dashboard .content .card-canvas {
+    padding: 26px;
+    border-radius: 6px;
+    background-color: rgba(var(--primary-color), 0.06);
+    border: var(--border-style);
+    border-color: rgba(var(--primary-color), 0.12);
+}
+
 .dashboard .content .wrapper-table table {
     border-radius: 6px;
     overflow: hidden;
