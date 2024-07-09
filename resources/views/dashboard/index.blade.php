@@ -49,5 +49,67 @@
                 </div>
             </div>
         </div>
+        @if (auth()->check() && auth()->user()->admin)
+            <div class="row mt-4">
+                <div class="col-md-12">
+                    <div class="card-canvas">
+                        <canvas id="myChart" style="height: 420px; width: 100%;"></canvas>
+                    </div>
+                </div>
+            </div>
+        @endif
     </div>
 @endsection
+
+@push('child-script')
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        const ctx = document.getElementById('myChart');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                datasets: [{
+                    data: [
+                        @json($data_transaction[1]),
+                        @json($data_transaction[2]),
+                        @json($data_transaction[3]),
+                        @json($data_transaction[4]),
+                        @json($data_transaction[5]),
+                        @json($data_transaction[6]),
+                        @json($data_transaction[7]),
+                        @json($data_transaction[8]),
+                        @json($data_transaction[9]),
+                        @json($data_transaction[10]),
+                        @json($data_transaction[11]),
+                        @json($data_transaction[12]),
+                    ],
+                    backgroundColor: [
+                        'rgba(189, 150, 72, 1)',
+                        'rgba(172, 132, 62, 1)',
+                        'rgba(189, 150, 72, 1)',
+                        'rgba(172, 132, 62, 1)',
+                        'rgba(189, 150, 72, 1)',
+                        'rgba(172, 132, 62, 1)',
+                        'rgba(189, 150, 72, 1)',
+                        'rgba(172, 132, 62, 1)',
+                        'rgba(189, 150, 72, 1)',
+                        'rgba(172, 132, 62, 1)',
+                        'rgba(189, 150, 72, 1)',
+                        'rgba(172, 132, 62, 1)',
+                    ],
+                    borderWidth: 1,
+                    borderColor: 'rgba(255, 255, 255, 0.12)',
+                    borderRadius: 8,
+                }]
+            },
+            options: {
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                },
+            }
+        });
+    </script>
+@endpush
