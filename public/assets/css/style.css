@@ -104,6 +104,7 @@ form.form .input {
     border: 1px solid rgba(var(--dark-color), 0.12);
     font-size: 0.875rem;
     transition: var(--transition-duration);
+    height: 46.6px !important;
 }
 
 form.form .input:focus,
